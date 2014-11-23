@@ -26,16 +26,12 @@ public class Article {
 		return text.toString();
 	}
 	
-	/*public void setText(String text){
-		this.text.append("");
-	}*/
-	
+	//append lower case text to article
 	public void appendText(String text){
-		this.text.append(text);
+		this.text.append(text.toLowerCase());
 	}
 	
 	public void removeText(){
-		//this.text.delete(0, text.length());
 		this.text = new StringBuilder();
 	}
 	
@@ -85,9 +81,4 @@ public class Article {
 	public String getInfoboxProperty(){
 		return infoboxProperty;
 	}
-	/*
-	@Override
-	public String toString(){
-		 return this.title + ": " + this.infoboxType + "\n";
-	}*/
 }

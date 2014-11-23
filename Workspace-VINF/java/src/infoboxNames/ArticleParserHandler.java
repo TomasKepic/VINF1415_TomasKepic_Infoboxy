@@ -1,6 +1,5 @@
 package infoboxNames;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 import org.xml.sax.Attributes;
@@ -9,9 +8,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class ArticleParserHandler extends DefaultHandler
 {
-	//private ArrayList articleList = new ArrayList();
 	
-	private StringBuilder articleList= new StringBuilder();
+	private StringBuilder infoboxList= new StringBuilder();
 	
 	private Stack elementStack = new Stack();
 	
@@ -53,7 +51,7 @@ public class ArticleParserHandler extends DefaultHandler
 			
 			object = InfoboxParser.parseArticleInfoboxType(object);
 			
-			//if we dont have any type of infobox in article we dont find properties
+			//if infobox contains some specific type of infobox in article we find specific property
 			if(!object.getInfoboxType().isEmpty() &&
 					(object.getInfoboxType().contains("country") || object.getInfoboxType().contains("musical artist")) ){
 				object = InfoboxParser.parseArticleInfoboxProperty(object);
@@ -61,10 +59,9 @@ public class ArticleParserHandler extends DefaultHandler
 			
 			object.removeText();
 			
-			//if we dont have any type of infobox in article we dont add article to our articleList
+			//if we have some type (with property if exist added to type string) of infobox in article we add article to our infoboxList
 			if(!object.getInfoboxType().isEmpty()){
-				//this.articleList.add(object);
-				articleList.append(object.getTitle() + "\t" + object.getInfoboxType() + "\n");
+				infoboxList.append(object.getTitle() + "\t" + object.getInfoboxType() + "\n");
 			}
 
 		}
@@ -88,8 +85,6 @@ public class ArticleParserHandler extends DefaultHandler
 			Article article = (Article) this.objectStack.peek();
 			
 			article.appendText(value);
-			
-			//article = InfoboxParser.parseArticleInfoboxType(article);
 
 		}
 	}
@@ -99,15 +94,10 @@ public class ArticleParserHandler extends DefaultHandler
 		return (String) this.elementStack.peek();
 	}
 	
-	/*
-	public ArrayList getArticles()
+
+	public StringBuilder getInfoboxes()
 	{
-		return articleList;
-	}
-	*/
-	public StringBuilder getArticles()
-	{
-		return articleList;
+		return infoboxList;
 	}
 	
 }

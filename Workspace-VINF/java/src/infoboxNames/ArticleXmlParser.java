@@ -2,7 +2,6 @@ package infoboxNames;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -14,8 +13,7 @@ public class ArticleXmlParser {
 	public StringBuilder parseXml(InputStream in)
 	{
 	
-		//ArrayList<Article> articles = new ArrayList<Article>();
-		StringBuilder articles = new StringBuilder();
+		StringBuilder infoboxes = new StringBuilder();
 		
 		try
 		{
@@ -29,7 +27,7 @@ public class ArticleXmlParser {
 			
 			parser.parse(source);
 			
-			articles = handler.getArticles();
+			infoboxes = handler.getInfoboxes();
 		
 		} catch (SAXException e) {
 			e.printStackTrace();
@@ -38,6 +36,6 @@ public class ArticleXmlParser {
 		} finally {
 			
 		}
-		return articles;
+		return infoboxes;
 	}
 }

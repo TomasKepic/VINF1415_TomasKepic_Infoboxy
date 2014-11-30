@@ -29,16 +29,19 @@ public class Statistics {
 	public void ProcessLine(String line){
 		
 		//System.out.println(line);
+		//split line to needed information
 		String[] nameTokens = line.split("\t");
 		String[] propertyTokens = nameTokens[1].split(" = ");
 		long nameCount;
 		//System.out.println(propertyTokens[0] + "\n" + propertyTokens[1]);
 		
+		//if new name, increase number of articles
 		if(nameTokens[0].compareTo(actualArticle)!=0){
 			actualArticle = nameTokens[0];
 			numberOfArticles++;
 		}
 		
+		//if line contains infobox name, we put it into hashmap for names and increase count
 		if(propertyTokens[0].compareTo("infobox")==0){
 			if(mapNameCount.containsKey(propertyTokens[1])){
 				nameCount = mapNameCount.get(propertyTokens[1]);
@@ -50,6 +53,7 @@ public class Statistics {
 			}
 		}
 		
+		//if line contains genre, we put it into hashmap for genres and increase count
 		if(propertyTokens[0].compareTo("genre")==0){
 			if(mapGenreCount.containsKey(propertyTokens[1])){
 				nameCount = mapGenreCount.get(propertyTokens[1]);
@@ -60,7 +64,8 @@ public class Statistics {
 				mapGenreCount.put(propertyTokens[1], (long) 1);
 			}
 		}
-		
+
+		//if line contains population_estimate, we put it into hashmap for population and increase count
 		if(propertyTokens[0].compareTo("population_estimate")==0){
 			if(mapGenreCount.containsKey(actualArticle)){
 				//nameCount = mapGenreCount.get(propertyTokens[1]);
@@ -76,6 +81,7 @@ public class Statistics {
 	
 	}
 	
+	//sorting hashmaps and writing statistics to files
 	public void WriteStatistics() throws IOException{
 		
 
@@ -88,7 +94,7 @@ public class Statistics {
 		//System.out.println(mapNamesCount);
 		
 		//writing infobox names count
-		System.out.println("Sorting infobox name hashmap...");
+		//System.out.println("Sorting infobox name hashmap...");
 		mapNameCount = sortByValues(mapNameCount);
 		
 		Iterator<String> keySetIterator = mapNameCount.keySet().iterator();
@@ -105,7 +111,7 @@ public class Statistics {
 		fwNameCount.close();
 		
 		//writing infobox genre count
-		System.out.println("Sorting infobox genre hashmap...");
+		//System.out.println("Sorting infobox genre hashmap...");
 		mapGenreCount = sortByValues(mapGenreCount);
 		
 		Iterator<String> keySetIterator2 = mapGenreCount.keySet().iterator();
@@ -121,8 +127,8 @@ public class Statistics {
 		fwGenreCount.append(sbGenreCount);
 		fwGenreCount.close();
 		
-		
-		System.out.println("Sorting infobox population hashmap...");
+		//writing infobox population count
+		//System.out.println("Sorting infobox population hashmap...");
 		mapPopulation = sortByValues(mapPopulation);
 		
 		Iterator<String> keySetIterator3 = mapPopulation.keySet().iterator();
@@ -144,7 +150,7 @@ public class Statistics {
 	//sorting hashmap by values
 	private static HashMap sortByValues(HashMap map) { 
 	      List list = new LinkedList(map.entrySet());
-	      // Defined Custom Comparator here
+	      //comparator
 	      Collections.sort(list, new Comparator() {
 	           public int compare(Object o2, Object o1) {
 	              return ((Comparable) ((Map.Entry) (o1)).getValue())
@@ -152,7 +158,7 @@ public class Statistics {
 	           }
 	      });
 
-	      //Copy the sorted list in HashMap using LinkedHashMap to preserve the insertion order
+	      //copy sorted list into hashmap using linkedhashmap to preserve the insertion order
 	      HashMap sortedHashMap = new LinkedHashMap();
 	      for (Iterator it = list.iterator(); it.hasNext();) {
 	             Map.Entry entry = (Map.Entry) it.next();

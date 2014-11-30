@@ -6,6 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+//handler for parsing xml wikipedia file
 public class ArticleParserHandler extends DefaultHandler
 {
 	
@@ -15,20 +16,12 @@ public class ArticleParserHandler extends DefaultHandler
 	
 	private Stack objectStack = new Stack();
 	
-	public void startDocument() throws SAXException
-	{
-		//System.out.println("start of the document: ");
-	}
-	
-	public void endDocument() throws SAXException
-	{
-		//System.out.println("end of the document: ");
-	}
 	
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
 	{
 		this.elementStack.push(qName);
 		
+		//if starting element is page, then we create new article
 		if("page".equals(qName))
 		{
 			Article article = new Article();
@@ -43,6 +36,7 @@ public class ArticleParserHandler extends DefaultHandler
 	{
 		this.elementStack.pop();
 		
+		//if ending element is page, then we handle and parse data which we set in article
 		if ("page".equals(qName))
 		{
 			Article object = (Article) this.objectStack.pop();
@@ -75,6 +69,7 @@ public class ArticleParserHandler extends DefaultHandler
 			return;
 		}
 		
+		//if actual element is title then set title value to article or if element is text then set text value to article
 		if("title".equals(currentElement()))
 		{
 			Article article = (Article) this.objectStack.peek();

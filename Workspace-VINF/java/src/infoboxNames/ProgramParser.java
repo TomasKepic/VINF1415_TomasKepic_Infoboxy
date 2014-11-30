@@ -14,20 +14,11 @@ public class ProgramParser
 	public static void main(String[] args) throws IOException{
 		
 		
-		//different input files
+		//input file
 		File xmlInput = new File("C:/Temp/sample_input_enwiki-latest-pages-articles3.xml-p000025001p000055000");
-		//File xmlInput = new File("C:/Temp/sample_input.xml");
-		//File xmlInput = new File("C:/Temp/sample_input_testovaci.xml");
-		//File xmlInput = new File("C:/Temp/sample_input_testovaci-slovakia.xml");
-		//File xmlInput = new File("C:/Temp/sample_input_WW2.xml");
-		//File xmlInput = new File("C:/Temp/enwiki-latest-pages-articles3.xml-p000025001p000055000"); // 392 MB
-		//File xmlInput = new File("C:/Temp/enwiki-latest-pages-articles26.xml-p026625004p029624976"); // 2.8 GB
-		//File xmlInput = new File("C:/Temp/enwiki-latest-pages-articles27.xml-p029625017p044065755"); // 14 GB
-		//File xmlInput = new File("C:/School - ING/3. Semester/VINF/Data - Articles/enwiki-latest-pages-articles.xml"); // complete wikipedia 48 GB 
 
-		//output files
+		//output file
 		File xmlOutput = new File("C:/Temp/infobox_output.txt");
-		//File xmlOutputInformation = new File("C:/Temp/sample_output_Information.xml");
 		
 		//parser for xml file
 		ArticleXmlParser parser = new ArticleXmlParser();
@@ -59,8 +50,6 @@ public class ProgramParser
 		
 		//STATISTICAL PROCESSING
 		System.out.println("Creating statistics...");
-		//File xmlOutputName = new File("C:/Temp/infobox_output.txt");
-		//File xmlOutputName = new File("C:/Temp/sample_output_name - 48 GB - po riadkoch.xml");
 		
 		Statistics statistics = new Statistics();
 		System.out.println("Statistics was created");
@@ -76,7 +65,7 @@ public class ProgramParser
 			}
 			frs.close();
 			statistics.WriteStatistics();
-			System.out.println("Statistics was written to files..");
+			System.out.println("Statistics was written to files");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		

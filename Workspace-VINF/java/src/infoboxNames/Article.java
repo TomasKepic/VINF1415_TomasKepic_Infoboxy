@@ -1,5 +1,6 @@
 package infoboxNames;
 
+//class for information about wikipedia article
 public class Article {
 
 	public Article() {

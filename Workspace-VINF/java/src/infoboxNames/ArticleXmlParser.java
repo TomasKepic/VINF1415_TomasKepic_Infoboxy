@@ -10,6 +10,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 public class ArticleXmlParser {
 
+	//creating and starting parser for wikipedia xml file
 	public StringBuilder parseXml(InputStream in)
 	{
 	
@@ -27,6 +28,7 @@ public class ArticleXmlParser {
 			
 			parser.parse(source);
 			
+			//get parsed information
 			infoboxes = handler.getInfoboxes();
 		
 		} catch (SAXException e) {

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class InfoboxParser {
 
-	
+	// parsing infobox name
 	public static Article parseArticleInfoboxType(Article article) {
 
 		
@@ -30,6 +30,7 @@ public class InfoboxParser {
 		return article;
 	}
 	
+	//parsing infobox property - population_estimate or musical genre
 	public static Article parseArticleInfoboxProperty(Article article){
 
 		String population;
